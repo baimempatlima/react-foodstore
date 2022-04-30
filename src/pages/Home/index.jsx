@@ -253,7 +253,7 @@ export default function Home() {
               </div>
             </div>
             <hr />
-            {products.lenght !== 0 ? (
+            {products.length !== 0 ? (
               <div className="row justify-content-center">
                 {products.map((product) => (
                   <div className="col-md-3 m-3">
