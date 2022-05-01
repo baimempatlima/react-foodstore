@@ -23,7 +23,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cart/user" element={<Carts />} />
           <Route path="/form-address/user" element={<FormAddress />} />
-          <Route path="/invoice/user" element={<Invoice />} />
+          <Route path="/invoice/user/:id" element={<Invoice />} />
           <Route path="/account/user" element={<Account />} />
         </Routes>
       </BrowserRouter>

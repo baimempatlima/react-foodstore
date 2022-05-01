@@ -37,7 +37,7 @@ export default function Login() {
             <div>
               <input type="text" name="email" placeholder="email" className="form-control" onChange={(e) => setEmail(e.target.value)} />
               {validation.error === 1 ? <p className="alert alert-warning">{validation.message}</p> : ""}
-              <input type="text" name="password" placeholder="password" className="form-control" onChange={(e) => setPassword(e.target.value)} />
+              <input type="password" name="password" placeholder="password" className="form-control" onChange={(e) => setPassword(e.target.value)} />
               {validation.error === 1 ? <p className="alert alert-danger">{validation.message}</p> : ""}
               <button onClick={submitLogin} className="btn btn-danger my-2 mb-3">
                 Login

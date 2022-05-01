@@ -25,12 +25,12 @@ export default function Myorder({ orderData }) {
               {orderData.data?.length !== 0 ? (
                 orderData.data
                   ?.sort((a, b) => a.order_number - b.order_number)
-                  .map((order, i) => (
-                    <tr>
+                  .map((order, index) => (
+                    <tr key={index}>
                       <th>#{order.order_number}</th>
                       <td>
-                        {order.order_items?.map((order, i) => (
-                          <div key={i}>
+                        {order.order_items?.map((order, index) => (
+                          <div key={index}>
                             {order.name}, {order.qty} x @{new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(order.price)}
                           </div>
                         ))}
@@ -38,7 +38,7 @@ export default function Myorder({ orderData }) {
                       <td>{new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(order.order_items?.map((item) => item.qty * item.price).reduce((preVal, currentVal) => preVal + currentVal, 0))}</td>
                       <td>{order.status}</td>
                       <td>
-                        <button type="button" class="btn btn-secondary btn-sm" onClick={() => navigate(`/invoice/user/${order.id}`)}>
+                        <button type="button" class="btn btn-secondary btn-sm" onClick={() => navigate(`/invoice/user/${order._id}`)}>
                           Invoice
                         </button>
                       </td>

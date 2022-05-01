@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
 import Myorder from "../../components/Myorder";
 import Profile from "../../components/Profile";
 
@@ -63,14 +65,19 @@ export default function Account() {
   }, []);
   return (
     <div>
+      <div>
+        <div className="mb-5">
+          <Header />
+        </div>
+      </div>
       <div className="container mt-5">
         <div className="container mt-8">
           <div className="toogle-btns">
             <Link to="/">
-              <i className="fa-solid  fa-solid fa-house toogle"></i>
+              <i className="fa-solid  fa-solid fa-house toogle1"></i>
             </Link>
-            <i className="fa-solid  fa-box-open toogle" onClick={() => setToogle(true)}></i>
-            <i className="fa-solid  fa-address-card toogle" onClick={() => setToogle(false)}></i>
+            <i className="fa-solid  fa-box-open toogle1" onClick={() => setToogle(true)}></i>
+            <i className="fa-solid  fa-address-card toogle1" onClick={() => setToogle(false)}></i>
             <i className="fa-solid  fa-solid fa-power-off  toogle toogle-kn " onClick={() => exit()}></i>
           </div>
           <div className="container bg-secondary item-center shadow-sm p-3 mb-5 bg-body rounded " style={{ width: "80%" }}>
@@ -85,6 +92,9 @@ export default function Account() {
             )}
           </div>
         </div>
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

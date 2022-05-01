@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 // import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Form } from "react-bootstrap";
+// import { Form } from "react-bootstrap";
 import { Listbox } from "@headlessui/react";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
-const defaultAddress = [{ name: "Choose One Address: " }];
+const defaultAddress = [{ name: "Choose One Address:" }];
 
 export default function Carts() {
   const navigate = useNavigate();
   const [user, setUser] = useState([]);
   const [carts, setCarts] = useState([]);
-  const [token] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const headersAuth = { headers: { Authorization: `Bearer ${token}` } };
   const [getAddress, setGetAddress] = useState([]);
   const [addresSelect, setAddresSelect] = useState(defaultAddress[0]);
@@ -97,7 +99,7 @@ export default function Carts() {
   const checkout = async () => {
     try {
       let payload = { user: user, delivery_fee: 0, order_items: carts, delivery_address: addresSelect };
-      if (addresSelect.name !== "Choose One Address:  ") {
+      if (addresSelect.name !== "Choose One Address:") {
         await axios.post(`http://localhost:3000/api/orders`, payload, headersAuth).then((res) => {
           setValidation(res.data);
           if (res.data.error !== 1) {
@@ -116,13 +118,18 @@ export default function Carts() {
   }, []);
 
   return (
-    <div className="container-fluid">
-      <div className="container-fluid mt-5">
+    <div>
+      <div>
+        <div className="mb-5">
+          <Header />
+        </div>
+      </div>
+      <div className="container-fluid mt-5  heighttt">
         <div className="container shadow-lg p-3 mb-5 bg-body rounded">
           <div className="flex-container">
             <div className="text-start">
               <Link to="/" className="btn btn-warning">
-                <i className="fa-solid fa-arrow-left"></i>
+                <i className="fa-solid fa-house"></i>
               </Link>
             </div>
           </div>
@@ -181,12 +188,12 @@ export default function Carts() {
                 </Listbox>
               </div>
               <div className="text-end mt-2" style={{ fontSize: "15px" }}>
-                <Link to="/address/user" className="btn btn-outline-warning btn-sm" alt="notfound">
+                <Link to="/form-address/user" className="btn btn-outline-warning btn-sm" alt="notfound">
                   <i className="fa-solid fa-circle-plus"> </i> Add New Address
                 </Link>
               </div>
               <div className="text-end mt-2">
-                {addresSelect.name === "Choose One Address: " ? <div className="valid-feedback text-end">please add a delivery address</div> : ""}
+                {addresSelect.name === "Choose One Address:" ? <div className="valid-feedback text-end">please add a delivery address</div> : ""}
                 {validation.error === 1 ? <p className="mb-2 text-red-400">{validation.message}</p> : ""}
               </div>
             </div>
@@ -202,6 +209,11 @@ export default function Carts() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div>
+        <div className="my-5">
+          <Footer />
         </div>
       </div>
     </div>

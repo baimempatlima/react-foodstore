@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 export default function Invoice() {
   const [invoice, setInvoice] = useState({});
@@ -13,7 +15,8 @@ export default function Invoice() {
 
   const getInvoice = async () => {
     try {
-      await axios.get(`http://localhost:3000/api/invoice/${id}`, headersAuth).then((res) => setInvoice(res.data));
+      await axios.get(`http://localhost:3000/api/invoices/${id}`, headersAuth).then((res) => setInvoice(res.data));
+      console.log(invoice);
     } catch (error) {
       console.log("not found");
     }
@@ -28,6 +31,11 @@ export default function Invoice() {
   }, []);
   return (
     <div>
+      <div>
+        <div className="mb-5">
+          <Header />
+        </div>
+      </div>
       <div className="container mt-5">
         <div className="container">
           <div className="container item-center shadow-sm p-3 mb-5 bg-body rounded " style={{ width: "80%" }}>
@@ -44,7 +52,7 @@ export default function Invoice() {
                 <tbody style={{ fontSize: "12px" }}>
                   <tr>
                     <th scope="row">Status</th>
-                    <td>{invoice.status}</td>
+                    <td>{invoice.payment_status}</td>
                   </tr>
                   <tr>
                     <th scope="row">Order ID</th>
@@ -59,9 +67,9 @@ export default function Invoice() {
                     <td colspan="2">
                       <p>{invoice.user?.full_name}</p>
                       <p>{invoice.user?.email}</p>
-                      <p>{invoice.delivery_address?.street}</p>
+                      <p>{invoice.delivery_address?.name}</p>
                       <p>
-                        {invoice.delivery_address?.city}, {invoice.delivery_address?.province} {invoice.delivery_address?.postal_code}
+                        {invoice.delivery_address?.keluarahan}, {invoice.delivery_address?.kecamatan} {invoice.delivery_address?.kabupaten}
                       </p>
                     </td>
                   </tr>
@@ -84,6 +92,9 @@ export default function Invoice() {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

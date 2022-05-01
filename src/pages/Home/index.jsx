@@ -7,6 +7,7 @@ import { Spinner } from "react-bootstrap";
 import Category from "../../components/Category";
 import Tags from "../../components/Tags";
 import Card from "../../components/Card";
+import Footer from "../../components/Footer";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -176,7 +177,7 @@ export default function Home() {
       <div>
         <div>
           <div>
-            <nav className="navbar navbar-expand-lg  shadow-lg p-3 mb-5 bg-body  rounded">
+            <nav className="navbar navbar-expand-lg  shadow-lg p-3 mb-5 bg-danger   rounded">
               <div className="container">
                 <a className="navbar-brand" href="/">
                   BUY FOOD
@@ -189,7 +190,7 @@ export default function Home() {
                     <div className="ms-auto">
                       <ul className="navbar-nav  mb-2 mb-lg-0 ">
                         <li className="nav-item">
-                          <p style={{ marginRight: "10px" }} className={`${detailUser.role === "admin" ? "text-uppercase" : ""}"text-capitalize mt-2 badge bg-secondary "`}>{`${detailUser.full_name}`}</p>
+                          <p style={{ marginRight: "10px" }} className={`${detailUser.role === "admin" ? "text-uppercase" : ""}"text-capitalize mt-2 badge bg-warning "`}>{`${detailUser.full_name}`}</p>
                         </li>
                         <li className="nav-item ">
                           <a className="nav-link" href="/cart/user">
@@ -253,7 +254,7 @@ export default function Home() {
               </div>
             </div>
             <hr />
-            {products.lenght !== 0 ? (
+            {products.length !== 0 ? (
               <div className="row justify-content-center">
                 {products.map((product) => (
                   <div className="col-md-3 m-3">
@@ -277,13 +278,13 @@ export default function Home() {
             {page === 1 ? (
               ""
             ) : (
-              <a className="previous round" onClick={() => pagePrev()} href="/#">
+              <a className="page-link" onClick={() => pagePrev()} href="/#">
                 &#8249;
               </a>
             )}
             <div className="py-0.5 px-6 rounded-md shadow-sm items-center justify-center border">{page}</div>
             {products.data?.length <= 10 && page * 10 < products.count ? (
-              <a className="next round" onClick={() => pageNext()} href="/#">
+              <a className="page-link" onClick={() => pageNext()} href="/#">
                 &#8250;
               </a>
             ) : (
@@ -291,6 +292,9 @@ export default function Home() {
             )}
           </div>
         </nav>
+      </div>
+      <div className="mt-5">
+        <Footer />
       </div>
     </div>
   );
